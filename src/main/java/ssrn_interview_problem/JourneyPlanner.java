@@ -3,20 +3,11 @@ package ssrn_interview_problem;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 class JourneyPlanner {
     private final Timetable timetable;
 
-    JourneyPlanner(String[][] timetable) {
-        List<String> stations = Arrays.asList(timetable[0]);
-        List<Train> trains = Arrays.stream(timetable)
-                .skip(1)
-                .map(trainTimes -> new Train(trainTimes, stations))
-                .collect(Collectors.toList());
-        this.timetable = new Timetable(trains);
+    JourneyPlanner(String[][] timetableData) {
+        this.timetable = TimetableFactory.createTimetableFrom(timetableData);
     }
 
     int getDurationBetween(LocalTime journeyStartTime, String departureStation, String arrivalStation) {
