@@ -16,12 +16,23 @@ class JourneyPlanner {
         stations = Arrays.asList(timetable[0]);
     }
 
-    int getDurationBetween(String departureStation, String arrivalStation) {
+    int getDurationBetween(LocalTime journeyStartTime, String departureStation, String arrivalStation) {
         int departureStationIndex = stations.indexOf(departureStation);
         int arrivalStationIndex = stations.indexOf(arrivalStation);
-        String[] firstTrainTimetable = timetable[1];
-        LocalTime departureTime = LocalTime.parse(firstTrainTimetable[departureStationIndex], DateTimeFormat.forPattern("HHmm"));
-        LocalTime arrivalTime = LocalTime.parse(firstTrainTimetable[arrivalStationIndex], DateTimeFormat.forPattern("HHmm"));
+
+        String[] firstAvailableTrainTimetable = Arrays.stream(timetable)
+                .skip(1)
+                .filter(trainTimetable -> localTimeFrom(trainTimetable[departureStationIndex]).equals(journeyStartTime))
+                .findFirst()
+                .get();
+
+        LocalTime departureTime = localTimeFrom(firstAvailableTrainTimetable[departureStationIndex]);
+        LocalTime arrivalTime = localTimeFrom(firstAvailableTrainTimetable[arrivalStationIndex]);
+
         return Minutes.minutesBetween(departureTime, arrivalTime).getMinutes();
+    }
+
+    private static LocalTime localTimeFrom(String militaryTimeString) {
+        return LocalTime.parse(militaryTimeString, DateTimeFormat.forPattern("HHmm"));
     }
 }
