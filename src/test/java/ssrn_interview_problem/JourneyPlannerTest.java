@@ -27,4 +27,14 @@ public class JourneyPlannerTest {
 
         assertThat(duration, is(equalTo(159)));
     }
+
+    @Test
+    public void shouldReportDurationIncludingWaitingTimeOnPlatform() {
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        LocalTime journeyStartTime = new LocalTime(11, 1);
+
+        int duration = journeyPlanner.getDurationBetween(journeyStartTime, "St Austell", "Par");
+
+        assertThat(duration, is(equalTo(56)));
+    }
 }

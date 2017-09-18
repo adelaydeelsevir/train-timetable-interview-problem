@@ -22,14 +22,17 @@ class JourneyPlanner {
 
         String[] firstAvailableTrainTimetable = Arrays.stream(timetable)
                 .skip(1)
-                .filter(trainTimetable -> localTimeFrom(trainTimetable[departureStationIndex]).equals(journeyStartTime))
+                .filter(trainTimetable -> !localTimeFrom(trainTimetable[departureStationIndex]).isBefore(journeyStartTime))
                 .findFirst()
                 .get();
 
         LocalTime departureTime = localTimeFrom(firstAvailableTrainTimetable[departureStationIndex]);
         LocalTime arrivalTime = localTimeFrom(firstAvailableTrainTimetable[arrivalStationIndex]);
 
-        return Minutes.minutesBetween(departureTime, arrivalTime).getMinutes();
+        Minutes timeWaitingForTrain = Minutes.minutesBetween(journeyStartTime, departureTime);
+        Minutes timeOnTrain = Minutes.minutesBetween(departureTime, arrivalTime);
+
+        return timeWaitingForTrain.plus(timeOnTrain).getMinutes();
     }
 
     private static LocalTime localTimeFrom(String militaryTimeString) {
