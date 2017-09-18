@@ -1,24 +1,18 @@
 package ssrn_interview_problem;
 
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
 
-import java.util.List;
+import java.util.Map;
 
 class Train {
-    private final String[] trainTimetable;
-    private final List<String> stations;
+    private final Map<String, LocalTime> stationTimes;
 
-    Train(String[] trainTimetable, List<String> stations) {
-        this.trainTimetable = trainTimetable;
-        this.stations = stations;
+    Train(Map<String, LocalTime> stationTimes) {
+        this.stationTimes = stationTimes;
     }
 
     LocalTime getTimeAt(String departureStation) {
-        return localTimeFrom(trainTimetable[stations.indexOf(departureStation)]);
+        return stationTimes.get(departureStation);
     }
 
-    private static LocalTime localTimeFrom(String militaryTimeString) {
-        return LocalTime.parse(militaryTimeString, DateTimeFormat.forPattern("HHmm"));
-    }
 }
