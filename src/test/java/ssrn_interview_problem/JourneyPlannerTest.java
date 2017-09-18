@@ -46,4 +46,13 @@ public class JourneyPlannerTest {
 
         assertThat(fastestTrain, is(equalTo("1357")));
     }
+
+    @Test
+    public void shouldReportEarliestRouteWhenThereIsATieBetweenFastestTrains() {
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+
+        String fastestTrain = journeyPlanner.getFastestTrainBetween("Par", "Bodmin Parkway");
+
+        assertThat(fastestTrain, is(equalTo("1108")));
+    }
 }
