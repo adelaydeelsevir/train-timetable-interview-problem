@@ -18,17 +18,16 @@ class JourneyPlanner {
     }
 
     int getDurationBetween(LocalTime journeyStartTime, String departureStation, String arrivalStation) {
-        int departureStationIndex = stations.indexOf(departureStation);
-        int arrivalStationIndex = stations.indexOf(arrivalStation);
 
-        String[] firstAvailableTrainTimetable = Arrays.stream(timetable)
+        Train firstAvailableTrainTimetable = Arrays.stream(timetable)
                 .skip(1)
-                .filter(trainTimetable -> !localTimeFrom(trainTimetable[departureStationIndex]).isBefore(journeyStartTime))
+                .map(trainTimes -> new Train(trainTimes, stations))
+                .filter(train -> !train.getTimeAt(departureStation).isBefore(journeyStartTime))
                 .findFirst()
                 .get();
 
-        LocalTime departureTime = localTimeFrom(firstAvailableTrainTimetable[departureStationIndex]);
-        LocalTime arrivalTime = localTimeFrom(firstAvailableTrainTimetable[arrivalStationIndex]);
+        LocalTime departureTime = firstAvailableTrainTimetable.getTimeAt(departureStation);
+        LocalTime arrivalTime = firstAvailableTrainTimetable.getTimeAt(arrivalStation);
 
         Minutes timeWaitingForTrain = Minutes.minutesBetween(journeyStartTime, departureTime);
         Minutes timeOnTrain = Minutes.minutesBetween(departureTime, arrivalTime);
@@ -37,20 +36,15 @@ class JourneyPlanner {
     }
 
     String getFastestTrainBetween(String departureStation, String arrivalStation) {
-        int departureStationIndex = stations.indexOf(departureStation);
-        int arrivalStationIndex = stations.indexOf(arrivalStation);
 
-        String[] fastestTrainTimetable = Arrays.stream(timetable)
+        Train fastestTrainTimetable = Arrays.stream(timetable)
                 .skip(1)
-                .sorted(Comparator.comparing(trainTimetable -> Minutes.minutesBetween(localTimeFrom(trainTimetable[departureStationIndex]), localTimeFrom(trainTimetable[arrivalStationIndex]))))
+                .map(trainTimes -> new Train(trainTimes, stations))
+                .sorted(Comparator.comparing(train -> Minutes.minutesBetween(train.getTimeAt(departureStation), train.getTimeAt(arrivalStation))))
                 .findFirst()
                 .get();
 
-        return fastestTrainTimetable[departureStationIndex];
-    }
-
-    private static LocalTime localTimeFrom(String militaryTimeString) {
-        return LocalTime.parse(militaryTimeString, DateTimeFormat.forPattern("HHmm"));
+        return fastestTrainTimetable.getTimeAt(departureStation).toString("HHmm");
     }
 
 }
