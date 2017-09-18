@@ -37,4 +37,13 @@ public class JourneyPlannerTest {
 
         assertThat(duration, is(equalTo(56)));
     }
+
+    @Test
+    public void shouldReportFastestTrainBetweenTwoStations() {
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+
+        String fastestTrain = journeyPlanner.getFastestTrainBetween("Exeter St Davids", "London Paddington");
+
+        assertThat(fastestTrain, is(equalTo("1357")));
+    }
 }

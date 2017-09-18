@@ -5,6 +5,7 @@ import org.joda.time.Minutes;
 import org.joda.time.format.DateTimeFormat;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 class JourneyPlanner {
@@ -35,7 +36,21 @@ class JourneyPlanner {
         return timeWaitingForTrain.plus(timeOnTrain).getMinutes();
     }
 
+    String getFastestTrainBetween(String departureStation, String arrivalStation) {
+        int departureStationIndex = stations.indexOf(departureStation);
+        int arrivalStationIndex = stations.indexOf(arrivalStation);
+
+        String[] fastestTrainTimetable = Arrays.stream(timetable)
+                .skip(1)
+                .sorted(Comparator.comparing(trainTimetable -> Minutes.minutesBetween(localTimeFrom(trainTimetable[departureStationIndex]), localTimeFrom(trainTimetable[arrivalStationIndex]))))
+                .findFirst()
+                .get();
+
+        return fastestTrainTimetable[departureStationIndex];
+    }
+
     private static LocalTime localTimeFrom(String militaryTimeString) {
         return LocalTime.parse(militaryTimeString, DateTimeFormat.forPattern("HHmm"));
     }
+
 }
