@@ -5,6 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile()
+    // Uncomment the next line to add compile-time dependencies to the main source set
+    // compile()
     testCompile('junit:junit:4.12')
 }
