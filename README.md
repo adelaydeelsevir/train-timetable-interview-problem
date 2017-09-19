@@ -17,4 +17,5 @@ Your job is to implement a journey planner that provides travel times and the fa
 ## Technical Notes
 * The full train timetable for testing is provided in the `ssrn_interview_problem.TestData` class.
 * The journey planner should be written in Java 1.8.
-* The application should be test-driven. 
+* The application should be test-driven.
+* It should be possible to run the tests using `gradle clean test`
