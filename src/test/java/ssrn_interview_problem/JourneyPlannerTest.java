@@ -10,7 +10,7 @@ public class JourneyPlannerTest {
 
     @Test
     public void shouldReportDurationOfJourneyBetweenTwoStations() {
-        JourneyPlanner journeyPlanner = new JourneyPlanner();
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
 
         int duration = journeyPlanner.durationOfJourneyStartingAt("0907", "Camborne", "Exeter St Davids");
 
