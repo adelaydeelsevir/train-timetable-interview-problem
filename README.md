@@ -3,7 +3,7 @@
 ## Context
 You have been asked to build an application to help people plan their train journeys on the Great Western Railway line.
 
-Your job is to implement a journey planner that provides travel times and the fastest trains based on a supplied timetable.
+Your job is to implement a journey planner that provides travel times and the fastest trains based on a supplied timetable.  You may use Google or another search engine to find reference resources for Java.
  
 ## Acceptance Criteria
 |Criterion|Given|When|Then|
