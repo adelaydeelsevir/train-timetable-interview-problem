@@ -1,9 +1,23 @@
 # SSRN Interview Problem
 
 ## Context
-You have been asked to build an application to help people plan their train journeys on the Great Western Railway line.
+You have been asked to work on the building an application to help people plan their train journeys on the Great Western Railway line.
 
-Your job is to implement a journey planner that provides travel times and the fastest trains based on a supplied timetable.  You may use Google or another search engine to find reference resources for Java.
+Your job is to implement a journey planner that provides travel times and the fastest trains based on a supplied timetable.  The project has already been started by another developer.
+
+We would like you to continue with the work, taking into account the application of a number of software engineering principles including:
+
+* Domain-driven Design
+* SOLID principles
+* CleanCode
+* Red-Green Refactoring
+
+As well as adding tests and making them pass, please see this as an oppotunity to: 
+
+*  refactor the code to improve legibility and maintainability
+*  refactor the code to improve the model of the data to be more object-oriented and domain specific
+
+You may use Google or another search engine to find reference resources for Java.
  
 ## Acceptance Criteria
 |Criterion|Given|When|Then|
