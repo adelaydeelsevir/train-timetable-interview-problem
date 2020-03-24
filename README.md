@@ -34,3 +34,14 @@ You may use Google or another search engine to find reference resources for Java
 * The application should be test-driven.
 * We would expect you to write at least one test per acceptance criterium.
 * It should be possible to run the tests using `gradle clean test`
+
+## Hints
+
+To return the time in minutes between two given time, you could use:
+
+```Duration.between(startTime, endTime).toMinutes()```
+
+This takes two parameters of class LocalTime.  A LocalTime object can be built from a the 24 hour string format
+given in the timetable like this:
+
+```LocalTime time = LocalTime.parse("1005", DateTimeFormatter.ofPattern("HHmm"));```

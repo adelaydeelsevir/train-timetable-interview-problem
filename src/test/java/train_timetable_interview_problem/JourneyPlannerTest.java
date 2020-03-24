@@ -22,6 +22,7 @@ public class JourneyPlannerTest {
     }
 
     @Test
+    @Ignore
     public void shouldReportDurationForFirstAvailableTrain() {
         // Given
         JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
