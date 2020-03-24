@@ -45,3 +45,6 @@ This takes two parameters of class LocalTime.  A LocalTime object can be built f
 given in the timetable like this:
 
 ```LocalTime time = LocalTime.parse("1005", DateTimeFormatter.ofPattern("HHmm"));```
+
+In TestData.TIMETABLE, you could consider the first row as being the ''route'' and the following rows as the 
+distinct "trains" following the route.
