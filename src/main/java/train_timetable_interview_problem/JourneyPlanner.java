@@ -1,4 +1,4 @@
-package ssrn_interview_problem;
+package train_timetable_interview_problem;
 
 import java.time.Duration;
 import java.time.LocalTime;

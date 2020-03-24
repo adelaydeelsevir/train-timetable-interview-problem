@@ -1,4 +1,4 @@
-package ssrn_interview_problem;
+package train_timetable_interview_problem;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;

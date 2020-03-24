@@ -1,4 +1,4 @@
-# SSRN Interview Problem
+# Train Timetable Interview Problem
 
 ## Context
 You have been asked to work on the building an application to help people plan their train journeys on the Great Western Railway line.
@@ -29,7 +29,7 @@ You may use Google or another search engine to find reference resources for Java
 |*Report Earliest Route When There Is A Tie Between Fastest Trains*|The 0951, 1108 and 1157 trains from Par are scheduled to reach Bodmin Parkway at 1003, 1119 and 1208, respectively|I ask for the fastest train from Par to Bodmin Parkway|I am told the 1108 is fastest|
 
 ## Technical Notes
-* The full train timetable for testing is provided in the `ssrn_interview_problem.TestData` class.
+* The full train timetable for testing is provided in the `train_timetable_interview_problem.TestData` class.
 * The journey planner should be written in Java 1.8.
 * The application should be test-driven.
 * We would expect you to write at least one test per acceptance criterium.

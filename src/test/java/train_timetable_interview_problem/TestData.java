@@ -1,4 +1,4 @@
-package ssrn_interview_problem;
+package train_timetable_interview_problem;
 
 public class TestData {
     public static final String[][] TIMETABLE = new String[][]{
