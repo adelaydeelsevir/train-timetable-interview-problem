@@ -22,7 +22,6 @@ public class JourneyPlannerTest {
     }
 
     @Test
-    @Ignore
     public void shouldReportDurationForFirstAvailableTrain() {
         // Given
         JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
@@ -35,7 +34,6 @@ public class JourneyPlannerTest {
     }
 
     @Test
-    @Ignore
     public void shouldReportDurationIncludingWaitingTimeOnPlatform() {
         // Given
         JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
@@ -48,25 +46,27 @@ public class JourneyPlannerTest {
     }
 
     @Test
-    @Ignore
     public void shouldReportFastestTrainBetweenTwoStations() {
         // Given
         JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
 
         // When I try to find the fastest train between "Exeter St Davids" and "London Paddington"
+        String train = journeyPlanner.fastestTrainBetween("Exeter St Davids", "London Paddington");
 
         // Then I find the next train departs at "1357"
+        assertThat(train, is(equalTo("1357")));
     }
 
     @Test
-    @Ignore
     public void shouldReportEarliestRouteWhenThereIsATieBetweenFastestTrains() {
         // Given
         JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
 
         // When
+        String train = journeyPlanner.fastestTrainBetween("Par", "Bodmin Parkway");
 
         // Then
+        assertThat(train, is(equalTo("1108")));
     }
 
 
