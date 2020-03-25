@@ -1,73 +1,64 @@
 package train_timetable_interview_problem;
 
+import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 public class JourneyPlannerTest {
+
+    private static final String[][] TIMETABLE = new String[][]
+            {
+                    {"Penzance", "St Erth", "Camborne", "Redruth", "Truro", "St Austell", "Par", "Bodmin Parkway", "Liskeard", "Plymouth", "Exeter St Davids", "Reading", "London Paddington"},
+                    {"0844", "0854", "0907", "0914", "0927", "0944", "0951", "1003", "1016", "1040", "1137", "1316", "1344"},
+                    {"1000", "1010", "1023", "1030", "1043", "1100", "1108", "1119", "1133", "1157", "1302", "1450", "1521"},
+                    {"1047", "1057", "1112", "1119", "1132", "1150", "1157", "1208", "1221", "1252", "1357", "1539", "1602"}
+            };
 
     @Test
     public void shouldReportDurationOfJourneyBetweenTwoStations() {
-        // Given
-        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TIMETABLE);
 
-        // When
         int duration = journeyPlanner.durationOfJourneyStartingAt("0907", "Camborne", "Exeter St Davids");
 
-        // Then
         assertThat(duration, is(equalTo(150)));
     }
 
     @Test
-    @Ignore
     public void shouldReportDurationForFirstAvailableTrain() {
-        // Given
-        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TIMETABLE);
 
-        // When
         int duration = journeyPlanner.durationOfJourneyStartingAt("1023", "Camborne", "Exeter St Davids");
 
-        // Then
         assertThat(duration, is(equalTo(159)));
     }
 
     @Test
-    @Ignore
     public void shouldReportDurationIncludingWaitingTimeOnPlatform() {
-        // Given
-        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TIMETABLE);
 
-        // When
         int duration = journeyPlanner.durationOfJourneyStartingAt("1101", "St Austell", "Par");
 
-        // Then
         assertThat(duration, is(equalTo(56)));
     }
 
     @Test
-    @Ignore
     public void shouldReportFastestTrainBetweenTwoStations() {
-        // Given
-        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TIMETABLE);
 
-        // When I try to find the fastest train between "Exeter St Davids" and "London Paddington"
+        String fastestTrain = journeyPlanner.fastestTrainBetween("Exeter St Davids", "London Paddington");
 
-        // Then I find the next train departs at "1357"
+        assertThat(fastestTrain, is(equalTo("1357")));
     }
 
     @Test
-    @Ignore
     public void shouldReportEarliestRouteWhenThereIsATieBetweenFastestTrains() {
-        // Given
-        JourneyPlanner journeyPlanner = new JourneyPlanner(TestData.TIMETABLE);
+        JourneyPlanner journeyPlanner = new JourneyPlanner(TIMETABLE);
 
-        // When
+        String fastestTrain = journeyPlanner.fastestTrainBetween("Par", "Bodmin Parkway");
 
-        // Then
+        assertThat(fastestTrain, is(equalTo("1108")));
     }
-
 
 }
